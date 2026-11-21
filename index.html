@@ -1,55 +1,973 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#10172a" />
-  <meta name="description" content="LILY'S 12 MONTHS — an interactive HRD learning experience, coming soon." />
-  <title>LILY'S 12 MONTHS | Coming Soon</title>
-  <style>
-    :root { color-scheme: dark; --bg: #10172a; --text: #f5f7fc; --muted: #bac5da; --border: rgba(255,255,255,.15); --accent: #a8c6ff; }
-    * { box-sizing: border-box; }
-    html, body { min-height: 100%; margin: 0; }
-    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; color: var(--text); background: var(--bg); }
-    body::before { content: ""; position: fixed; inset: 0; z-index: -1; background: radial-gradient(circle at 80% 15%, rgba(112,153,231,.18), transparent 42%), radial-gradient(circle at 12% 90%, rgba(88,116,183,.15), transparent 35%); }
-    .page { min-height: 100dvh; max-width: 1100px; margin: auto; padding: 30px clamp(24px, 6vw, 80px); display: flex; flex-direction: column; }
-    header, footer { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
-    .brand { font-size: .77rem; font-weight: 800; letter-spacing: .16em; }
-    .semester { font-size: .78rem; color: var(--muted); letter-spacing: .05em; }
-    main { flex: 1; display: flex; flex-direction: column; justify-content: center; padding: clamp(70px, 14vh, 130px) 0; }
-    .eyebrow { width: max-content; padding: 9px 14px; border: 1px solid var(--border); border-radius: 100px; color: var(--accent); font-size: .75rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; }
-    h1 { max-width: 780px; margin: 26px 0 18px; font-size: clamp(3.2rem, 10vw, 7.2rem); line-height: .98; font-weight: 850; letter-spacing: -.065em; }
-    h1 span { color: var(--accent); }
-    .subtitle { margin: 0; font-size: clamp(1.06rem, 2vw, 1.38rem); line-height: 1.5; color: #e2e9f6; }
-    .description { max-width: 510px; margin-top: 18px; font-size: .97rem; line-height: 1.75; color: var(--muted); }
-    .divider { margin-top: 54px; width: min(100%, 560px); height: 1px; background: var(--border); }
-    .meta { display: flex; flex-wrap: wrap; gap: 10px 28px; margin-top: 22px; font-size: .8rem; letter-spacing: .04em; color: var(--muted); }
-    .meta strong { color: var(--text); font-weight: 700; }
-    footer { border-top: 1px solid var(--border); padding-top: 20px; font-size: .76rem; color: var(--muted); }
-    @media (max-width: 550px) { .page { padding: 24px; } .semester { font-size: .67rem; } main { padding: 96px 0 110px; } footer { align-items: flex-start; flex-direction: column; } }
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lily's 12 Months · Team 3 HRD Proposal</title>
+<meta name="description" content="Companion site to Team 3's HRD consulting proposal: a 12-month career development plan and a one-day client simulation.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --violet:#5B4FD1; --violet-d:#4B3FC0; --violet-dd:#2E2680;
+  --ink:#1F1D3A; --ink2:#3E3B63; --body:#4A4868; --muted:#6E6B8C;
+  --teal:#17706B; --teal-d:#0E4F4B; --blue:#2F5F9E; --blue-d:#1F3F6B;
+  --lav:#EFECFF; --sky:#E9F1FB; --mint:#E3F6F4; --line:#E4E1F2; --soft:#F6F5FB;
+  --card:#FFFFFF; --r:16px; --r-s:10px;
+  --shadow:0 1px 2px rgba(31,29,58,.05),0 8px 24px rgba(31,29,58,.06);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--body);font-size:15.5px;line-height:1.6;
+  background:linear-gradient(160deg,#F2EFFF 0%,#EEF0FD 45%,#E7F1FB 100%) fixed;min-height:100vh}
+h1,h2,h3,h4{font-family:"Plus Jakarta Sans",Inter,system-ui,sans-serif;color:var(--ink);line-height:1.25;margin:0}
+p{margin:0 0 .7em}
+a{color:var(--violet-d)}
+button{font:inherit;cursor:pointer}
+.wrap{max-width:980px;margin:0 auto;padding:0 18px}
+
+/* header + tabs */
+.top{position:sticky;top:0;z-index:20;background:rgba(246,245,253,.86);backdrop-filter:saturate(1.4) blur(12px);-webkit-backdrop-filter:saturate(1.4) blur(12px);border-bottom:1px solid var(--line)}
+.top-row{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 0 6px}
+.brand{font-family:"Plus Jakarta Sans",Inter,system-ui,sans-serif;font-weight:800;color:var(--ink);font-size:16px;letter-spacing:-.01em}
+.brand span{color:var(--violet)}
+.month{font-size:12px;font-weight:600;color:var(--violet-d);background:var(--lav);border-radius:999px;padding:3px 10px;white-space:nowrap}
+.tabs{display:flex;gap:6px;overflow-x:auto;padding:4px 0 10px;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tab{flex:0 0 auto;border:1px solid var(--line);background:#fff;color:var(--ink2);border-radius:999px;padding:6px 13px;font-size:13.5px;font-weight:600;white-space:nowrap}
+.tab[aria-selected="true"]{background:var(--violet);border-color:var(--violet);color:#fff}
+
+main{padding:22px 0 60px}
+section.panel{display:none}
+section.panel.on{display:block;animation:fade .25s ease}
+@keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+
+/* type helpers */
+.eyebrow{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--violet-d);margin-bottom:6px}
+.eyebrow.teal{color:var(--teal)}
+.lead{font-size:17px;color:var(--ink2)}
+.muted{color:var(--muted);font-size:13.5px}
+.small{font-size:13.5px}
+h1.title{font-size:clamp(30px,6vw,48px);letter-spacing:-.02em}
+h1.title em{font-style:normal;color:var(--violet)}
+h2.sec{font-size:clamp(22px,4vw,28px);letter-spacing:-.01em;margin-bottom:6px}
+h3{font-size:17px;margin-bottom:6px}
+.pill{display:inline-block;font-size:12px;font-weight:600;border-radius:999px;padding:3px 10px;background:var(--lav);color:var(--violet-d);margin:0 6px 6px 0}
+.pill.teal{background:var(--mint);color:var(--teal-d)}
+.pill.blue{background:var(--sky);color:var(--blue-d)}
+.pill.ink{background:var(--ink);color:#fff}
+
+/* cards + grids */
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:18px;box-shadow:var(--shadow)}
+.card.lav{background:var(--lav);border-color:#DCD7FB;box-shadow:none}
+.card.sky{background:var(--sky);border-color:#D3E2F5;box-shadow:none}
+.card.mint{background:var(--mint);border-color:#CBEAE6;box-shadow:none}
+.card.dark{background:var(--ink);border-color:var(--ink);color:#E9E7F6}
+.card.dark h3,.card.dark h4{color:#fff}
+.grid{display:grid;gap:14px}
+@media(min-width:720px){.g2{grid-template-columns:1fr 1fr}.g3{grid-template-columns:repeat(3,1fr)}.g4{grid-template-columns:repeat(4,1fr)}}
+.stack>*+*{margin-top:14px}
+.block{margin-top:26px}
+.quote{font-family:"Plus Jakarta Sans",Inter,system-ui,sans-serif;font-weight:700;color:var(--ink);font-size:clamp(18px,3.4vw,22px);line-height:1.35}
+.indicator{border-left:3px solid var(--violet);padding:2px 0 2px 12px;color:var(--ink2);font-style:italic}
+
+/* hero */
+.hero{display:grid;gap:18px;align-items:center}
+@media(min-width:760px){.hero{grid-template-columns:1.25fr .75fr}}
+.lily{position:relative;border-radius:24px;overflow:hidden;background:linear-gradient(180deg,#E6E2FF,#DCEBFB);aspect-ratio:1/1.05;max-width:360px;margin:0 auto;width:100%}
+.lily img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 25%}
+.lily .tag{position:absolute;top:12px;left:12px;z-index:1;box-shadow:0 1px 4px rgba(0,0,0,.12)}
+.meters{display:grid;gap:8px;margin-top:14px}
+.meter{background:#fff;border:1px solid var(--line);border-radius:12px;padding:9px 12px}
+.meter .row{display:flex;justify-content:space-between;font-size:13.5px;font-weight:600;color:var(--ink)}
+.meter .row span:last-child{color:var(--muted);font-weight:500}
+.bar{height:6px;border-radius:6px;background:#ECEAF6;margin-top:6px;overflow:hidden}
+.bar i{display:block;height:100%;width:34%;border-radius:6px;background:var(--violet)}
+.bar.t i{background:var(--teal)}.bar.b i{background:#7FA8DC}
+
+/* roadmap */
+.glance{display:grid;gap:12px;grid-template-columns:minmax(0,1fr)}
+@media(min-width:560px){.glance{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(min-width:900px){.glance{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.gl{display:flex;flex-direction:column;gap:4px;background:#fff;border:1px solid var(--line);border-radius:16px;padding:16px 18px;text-decoration:none;color:inherit;transition:border-color .15s,transform .15s}
+.gl:hover{border-color:var(--violet);transform:translateY(-2px)}
+.gl .when{font-size:12px;font-weight:700;color:var(--violet-d)}
+.gl .big{font-family:"Plus Jakarta Sans",Inter,system-ui,sans-serif;font-size:22px;font-weight:800;color:var(--ink);line-height:1.15}
+.gl .name{font-weight:600;color:var(--ink)}
+.gl .what{font-size:13.5px;color:var(--muted)}
+.gl .go{margin-top:auto;padding-top:8px;font-size:13.5px;font-weight:600;color:var(--violet-d)}
+.gl.as{background:var(--lav)}
+details.more{margin-top:26px;background:#fff;border:1px solid var(--line);border-radius:16px;padding:4px 18px}
+details.more>summary{cursor:pointer;font-weight:700;padding:14px 0;min-height:44px;color:var(--violet-d)}
+details.more[open]{padding-bottom:18px}
+.road{display:grid;gap:10px}
+.road a{display:block;text-decoration:none;color:inherit}
+.stop{display:grid;grid-template-columns:76px 1fr;gap:12px;align-items:start;background:#fff;border:1px solid var(--line);border-radius:14px;padding:12px 14px;transition:border-color .15s,transform .15s}
+.stop:hover{border-color:var(--violet);transform:translateY(-1px)}
+.stop .when{font-size:12px;font-weight:700;color:var(--violet-d)}
+.stop h4{font-size:15.5px}
+.stop p{margin:2px 0 0;font-size:13.5px;color:var(--muted)}
+
+/* tables */
+.tbl{width:100%;border-collapse:collapse;font-size:13.5px;background:#fff;border-radius:12px;overflow:hidden}
+.tbl th,.tbl td{border-bottom:1px solid var(--line);padding:9px 10px;text-align:left;vertical-align:top}
+.tbl th{background:var(--lav);color:var(--ink);font-weight:700;font-size:12.5px}
+.tbl tr:last-child td{border-bottom:0}
+.scroll{overflow-x:auto;border:1px solid var(--line);border-radius:12px}
+
+/* steps */
+.steps{display:grid;gap:8px}
+@media(min-width:720px){.steps{grid-template-columns:repeat(var(--n,3),1fr)}}
+.step{background:#fff;border:1px solid var(--line);border-radius:12px;padding:10px 12px}
+.step b{display:block;color:var(--ink);font-size:13.5px}
+.step span{font-size:13px;color:var(--muted)}
+.step .num{color:#fff;background:var(--teal,#17706B);font-size:12px}
+.num{display:inline-grid;place-items:center;width:22px;height:22px;border-radius:50%;background:var(--violet);color:#fff;font-size:12px;font-weight:700;margin-right:6px}
+
+/* try box */
+.try{border:1.5px dashed #B9B2F2;background:rgba(255,255,255,.7);border-radius:var(--r);padding:18px}
+.try>.eyebrow::before{content:"▶ ";}
+.btn{border:0;border-radius:10px;background:var(--violet);color:#fff;font-weight:600;padding:9px 16px}
+.btn:hover{background:var(--violet-d)}
+.btn.ghost{background:#fff;color:var(--violet-d);border:1px solid #CFC9F6}
+.btn.teal{background:var(--teal)}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.btns{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+textarea,input[type=text],select{width:100%;font:inherit;font-size:14.5px;color:var(--ink);border:1px solid #D9D5EE;border-radius:10px;padding:10px 12px;background:#fff}
+textarea{min-height:96px;resize:vertical}
+textarea:focus,input:focus,select:focus{outline:2px solid #C9C2FA;border-color:var(--violet)}
+label.opt{display:flex;gap:10px;align-items:flex-start;background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px 12px;margin-top:8px;cursor:pointer;font-size:14px}
+label.opt input{margin-top:4px;accent-color:var(--violet)}
+.seg{display:inline-flex;border:1px solid #D9D5EE;border-radius:10px;overflow:hidden;background:#fff}
+.seg button{border:0;background:#fff;padding:6px 10px;font-size:13px;color:var(--ink2)}
+.seg button+button{border-left:1px solid #D9D5EE}
+.seg button.on{background:var(--violet);color:#fff}
+.reveal{display:none;margin-top:12px}
+.reveal.on{display:block;animation:fade .25s}
+.note{font-size:12.5px;color:var(--muted);margin-top:10px}
+
+/* game cards */
+.gcard{border-radius:14px;padding:16px;min-height:120px;display:flex;flex-direction:column;justify-content:center}
+.gcard.metric{background:linear-gradient(135deg,#5B4FD1,#7A6FE6);color:#fff}
+.gcard.metric h4{color:#fff;font-size:20px}
+.gcard.context{background:#fff;border:2px solid var(--teal);color:var(--ink)}
+.gcard .k{font-size:11.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;opacity:.8;margin-bottom:4px}
+
+/* A3 claims */
+.claim{background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin-top:10px}
+.claim .q{font-weight:600;color:var(--ink);margin-bottom:8px}
+.claim .ctrl{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.claim .ans{display:none;margin-top:10px;font-size:13.5px;background:var(--soft);border-radius:8px;padding:9px 11px}
+.claim .ans.on{display:block}
+.mark{font-weight:700}
+.mark.ok{color:var(--teal)}.mark.no{color:#B3413B}
+
+/* A4 */
+.mcard{background:#fff;border:1px solid var(--line);border-radius:12px}
+.flow{display:flex;gap:6px;overflow-x:auto;padding:2px 0 6px;scrollbar-width:none}
+.flow::-webkit-scrollbar{display:none}
+.flow button{flex:0 0 auto;border:1px solid var(--line);background:#fff;border-radius:12px;padding:8px 12px;text-align:left;min-width:132px}
+.flow button b{display:block;font-size:13px;color:var(--ink)}
+.flow button span{font-size:11.5px;color:var(--muted)}
+.flow button.on{border-color:var(--violet);background:var(--lav)}
+.flow button.done b::after{content:" ✓";color:var(--teal)}
+.substep{display:none}.substep.on{display:block;animation:fade .25s}
+.email{background:#fff;border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.email .hd{background:var(--soft);padding:10px 14px;font-size:13px;color:var(--muted);display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px}
+.email .bd{padding:14px}
+.email .subj{font-weight:700;color:var(--ink);margin-bottom:6px}
+.brief dl{display:grid;grid-template-columns:1fr;gap:2px 14px;margin:0}
+@media(min-width:640px){.brief dl{grid-template-columns:170px 1fr}}
+.brief dt{font-weight:700;color:var(--ink);font-size:13.5px}
+.brief dd{margin:0 0 8px;font-size:14px}
+.cand{background:#fff;border:1px solid var(--line);border-radius:16px;padding:16px}
+.cand .head{display:flex;justify-content:space-between;align-items:baseline;gap:8px;flex-wrap:wrap}
+.cand .name{font-family:"Plus Jakarta Sans",Inter,system-ui,sans-serif;font-weight:800;font-size:19px;color:var(--ink)}
+.cand .fol{font-family:"Plus Jakarta Sans",Inter,system-ui,sans-serif;font-weight:800;font-size:26px;color:var(--violet)}
+.cand .fol small{font-size:12px;color:var(--muted);font-weight:600}
+.cand h5{font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:12px 0 4px}
+.ages{display:grid;grid-template-columns:repeat(5,1fr);gap:4px;font-size:12px;text-align:center}
+.ages div{background:var(--soft);border-radius:6px;padding:4px 2px}
+.ages b{display:block;color:var(--ink);font-size:13px}
+.kv{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.kv div{background:var(--soft);border-radius:8px;padding:6px 8px;font-size:12.5px}
+.kv b{display:block;color:var(--ink);font-size:14px}
+.cmt{font-size:13px;background:var(--soft);border-radius:8px;padding:6px 9px;margin-top:4px}
+.ws{width:100%;border-collapse:collapse;font-size:13px}
+.ws th,.ws td{border:1px solid var(--line);padding:6px;vertical-align:top;background:#fff}
+.ws th{background:var(--lav);color:var(--ink);text-align:left}
+.ws input{border:1px solid #E1DEF0;border-radius:6px;padding:5px 7px;font-size:13px;min-width:110px}
+.update{background:var(--ink);color:#fff;border-radius:14px;padding:14px 16px}
+.update .k{font-size:11.5px;letter-spacing:.1em;font-weight:700;color:#B9B2F2}
+.update b{font-family:"Plus Jakarta Sans",Inter,system-ui,sans-serif;font-size:22px;display:block}
+.timer{font-family:"Plus Jakarta Sans",Inter,system-ui,sans-serif;font-weight:800;font-size:22px;color:var(--teal)}
+.five{display:grid;gap:6px}
+.five div{background:#fff;border:1px solid var(--line);border-radius:10px;padding:8px 10px;font-size:14px;color:var(--ink);font-weight:600}
+.five div span{display:block;font-weight:400;font-size:12.5px;color:var(--muted)}
+
+footer{border-top:1px solid var(--line);padding:22px 0 40px;font-size:12.5px;color:var(--muted)}
+.next{display:flex;justify-content:space-between;gap:10px;margin-top:30px}
+.next a{font-weight:600;text-decoration:none;font-size:14px}
+</style>
 </head>
 <body>
-  <div class="page">
-    <header>
-      <div class="brand">LILY / HRD</div>
-      <div class="semester">2026 · FALL · TEAM 3</div>
-    </header>
-    <main>
-      <div class="eyebrow">Coming soon</div>
-      <h1>LILY'S<br /><span>12 MONTHS.</span></h1>
-      <p class="subtitle">From metrics to meaningful decisions.</p>
-      <p class="description">An interactive learning experience in social media performance-insight reasoning. Our journey is almost ready to begin.</p>
-      <div class="divider"></div>
-      <div class="meta">
-        <div><strong>PROGRAM</strong> &nbsp; 12-Month Development Journey</div>
-        <div><strong>PROJECT</strong> &nbsp; HRD · Team 3</div>
-      </div>
-    </main>
-    <footer>
-      <span>LILY'S 12 MONTHS</span>
-      <span>Preview page · Content coming soon</span>
-    </footer>
+
+<header class="top">
+  <div class="wrap">
+    <div class="top-row">
+      <div class="brand">Lily’s <span>12 Months</span></div>
+      <div class="month" id="monthTag">M1 / 12</div>
+    </div>
+    <nav class="tabs" role="tablist" aria-label="Sections">
+      <button class="tab" role="tab" data-tab="home">Overview</button>
+      <button class="tab" role="tab" data-tab="entry">Entry</button>
+      <button class="tab" role="tab" data-tab="a1">Activity 1</button>
+      <button class="tab" role="tab" data-tab="a2">Activity 2</button>
+      <button class="tab" role="tab" data-tab="a3">Activity 3</button>
+      <button class="tab" role="tab" data-tab="a4">Activity 4 · Make Your Case</button>
+      <button class="tab" role="tab" data-tab="exit">Exit</button>
+      <button class="tab" role="tab" data-tab="plan">Evaluation &amp; AI</button>
+    </nav>
   </div>
+</header>
+
+<main class="wrap">
+
+<!-- ================= OVERVIEW ================= -->
+<section class="panel" id="p-home" data-month="M1 / 12">
+  <div class="hero">
+    <div>
+      <div class="eyebrow">Career development mission · Team 3</div>
+      <h1 class="title">Lily’s <em>12 Months</em></h1>
+      <p class="lead" style="margin-top:8px"><b>From Developing to Proficient.</b> An HRD consulting proposal to the Konkuk University Career and Employment Support Center.</p>
+      <p>Meet Lily: 24, a marketing graduate with internship experience, aiming to become a social media marketer. She has the foundation. But is she ready for the judgments employers expect?</p>
+      <div class="meters">
+        <div class="meter"><div class="row"><span>Interpret · Area 1</span><span>Developing</span></div><div class="bar b"><i></i></div></div>
+        <div class="meter"><div class="row"><span>Verify · Area 4</span><span>Developing</span></div><div class="bar"><i></i></div></div>
+        <div class="meter"><div class="row"><span>Decide · Area 3</span><span>Developing</span></div><div class="bar t"><i></i></div></div>
+      </div>
+      <p class="muted" style="margin-top:8px">Lily’s starting level is assumed for program design and checked at the Entry assessment.</p>
+    </div>
+    <div>
+      <div class="lily"><span class="pill tag">M1 · Starting profile</span><img src="assets/lily-m1.webp" alt="Illustration of Lily, a fictional persona, at the start of the program"></div>
+      <p class="muted" style="text-align:center;margin-top:6px">Fictional persona developed for this training proposal · AI-generated image</p>
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="eyebrow">Part A · The 12-month roadmap</div>
+    <h2 class="sec">Lily’s year at a glance</h2>
+    <p class="muted">Tap a card to explore it. Most activities have a short “Try it” exercise.</p>
+    <div class="glance">
+      <a class="gl as" href="#entry"><span class="when">Q1 · M1</span><span class="big">Entry</span><span class="name">Entry Assessment</span><span class="what">Areas 1 · 4 · 3 · starting level</span><span class="go">Open →</span></a>
+      <a class="gl" href="#a1"><span class="when">Q1 · M1–M3</span><span class="big">Activity 1</span><span class="name">When Numbers Whisper</span><span class="what">Area 1 · lectures, quizzes and an on-campus game · no AI</span><span class="go">Open →</span></a>
+      <a class="gl" href="#a2"><span class="when">Q2 · M4–M6</span><span class="big">Activity 2</span><span class="name">Connect the Dots</span><span class="what">Area 1 · coaching ◆ ◇</span><span class="go">Open →</span></a>
+      <a class="gl" href="#a3"><span class="when">Q3 · M7–M9</span><span class="big">Activity 3</span><span class="name">Line by Line</span><span class="what">Area 4 · on-the-job project ▲</span><span class="go">Open →</span></a>
+      <a class="gl" href="#a4"><span class="when">Q4 · M10–M11</span><span class="big">Activity 4</span><span class="name">Make Your Case</span><span class="what">Area 3 · client simulation day with an AI client (M10)</span><span class="go">Open →</span></a>
+      <a class="gl as" href="#exit"><span class="when">Q4 · M12</span><span class="big">Exit</span><span class="name">Exit Assessment</span><span class="what">Areas 1 · 4 · 3 · target level</span><span class="go">Open →</span></a>
+    </div>
+    <p class="muted" style="margin-top:8px">About 45 learner hours · mostly online · four on-campus sessions · Learners use no AI in assessments.</p>
+  </div>
+
+  <details class="more">
+    <summary>More about the plan: the readiness gap, AI and market differences</summary>
+  <div class="block">
+    <div class="eyebrow">The readiness gap · Areas 1 · 4 · 3</div>
+    <h2 class="sec">From basic execution to evidence-based judgment — and work that shows it</h2>
+    <div class="scroll"><table class="tbl">
+      <tr><th style="width:16%"></th><th>M1 · Developing (start)</th><th>M12 · Proficient (target)</th></tr>
+      <tr><td><b>Interpret</b><br><span class="muted">Area 1 · Norway Q4</span></td><td>Explains what common metrics measure and links them to the campaign objective.</td><td>Interprets performance metrics in the context of campaign goals, platforms, content formats, and audiences, and explains how these factors affect the assessment of campaign results.</td></tr>
+      <tr><td><b>Verify</b><br><span class="muted">Area 4 · Norway Q3</span></td><td>Checks whether figures in a report or AI-generated summary match the original platform data, and flags mismatches for clarification.</td><td>Verifies AI-assisted conclusions against source data and campaign context, identifies unsupported claims or missing context, and revises the analysis before sharing it.</td></tr>
+      <tr><td><b>Decide</b><br><span class="muted">Area 3 · Korea Q5 · Myanmar Q3</span></td><td>Uses basic audience and brand-fit information alongside visible popularity indicators to recommend a content or influencer option and explains one reason for the choice.</td><td>Compares several content or influencer options against the campaign goal and target audience using multiple criteria and recommends one while explaining the trade-offs.</td></tr>
+    </table></div>
+    <p class="muted" style="margin-top:6px">Indicators quoted from our revised competency dictionary · Competency: <b>Social Media Performance-Insight Reasoning</b> (Area 2 is outside this plan).</p>
+  </div>
+
+  <div class="block grid g2">
+    <div class="card">
+      <div class="eyebrow">What AI changes</div>
+      <h3>AI compiles the numbers; the marketer must interpret, verify and decide</h3>
+      <p class="small">Key metrics now come from one prompt, but a person still reviews and completes the analysis (Norway Q3). Weak input to AI produces weak output (Myanmar Q2).</p>
+      <p class="small" style="margin:0"><b>Design principle:</b> AI gathers the data; the marketer makes the strategic judgment and owns the final decision.</p>
+    </div>
+    <div class="card">
+      <div class="eyebrow">Our approach</div>
+      <h3>Understand → Verify → Decide → Prove</h3>
+      <p class="small" style="margin:0">Verifying an AI analysis against source data and campaign context (Area 4) needs the context-reading skill from Area 1 first. Choosing between promotional options (Area 3) then uses both: interpreted and verified evidence. Guidance decreases as Lily moves from modeled to supported to independent work.</p>
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="eyebrow">Market differences</div>
+    <h3>One common roadmap; we adapt only where the evidence differs</h3>
+    <div class="grid g3">
+      <div class="card sky"><b>◆ Korea</b><p class="small" style="margin:4px 0 0">Activity 2 — optional data from an account the learner runs, reflecting the channel experience some Korean postings ask for.</p></div>
+      <div class="card sky"><b>◇ Norway</b><p class="small" style="margin:4px 0 0">Activity 2 — one dataset is a GA4 report, reflecting the GA4 skills requested in the Cutters posting.</p></div>
+      <div class="card sky"><b>▲ Myanmar</b><p class="small" style="margin:4px 0 0">Activity 3 — present and defend the verified report, reflecting the interview emphasis on explaining and presenting ideas.</p></div>
+    </div>
+    <p class="muted" style="margin-top:6px">Based on the job postings and interviews examined in Project 1; findings are not nationally representative.</p>
+  </div>
+  </details>
+</section>
+
+<!-- ================= ENTRY ================= -->
+<section class="panel" id="p-entry" data-month="M1 / 12">
+  <div class="eyebrow">Q1 · M1 · Assessment</div>
+  <h2 class="sec">Entry Assessment — where does Lily start?</h2>
+  <p class="lead">The year opens with an assessment of all three areas, so the starting level is measured rather than guessed.</p>
+  <div class="grid g3 block" style="margin-top:14px">
+    <div class="card"><h3>1 · Self-assessment</h3><p class="small" style="margin:0">Lily reads the Developing and Proficient indicators for each area and marks where she stands now.</p></div>
+    <div class="card"><h3>2 · Three short cases</h3><p class="small" style="margin:0">One work sample per area: interpret a performance sheet (35 min), verify a short AI analysis (40 min), recommend one of four candidates (30 min). No AI, no personal job aids.</p></div>
+    <div class="card"><h3>3 · Feedback interview</h3><p class="small" style="margin:0">An alumni assessor who will not coach her scores the cases, then a 15-minute interview compares her self-view with the result and sets one-year goals.</p></div>
+  </div>
+  <p class="muted" style="margin-top:8px">AI: Claude drafts the cases; the assessor reviews every one. Learners use no AI.</p>
+
+  <div class="try block">
+    <div class="eyebrow">Try it · Self-assessment</div>
+    <h3>Where would you place yourself today?</h3>
+    <p class="small">For each area, choose the statement that describes what you can already do. This is a self-view, not evidence — in the program, the cases decide.</p>
+    <div id="selfEntry"></div>
+    <div class="btns"><button class="btn" data-save="entry">Save my Entry profile</button></div>
+    <div class="reveal" id="entrySaved"><div class="card mint small">Saved in this browser. Open the <a href="#exit">Exit</a> tab later to repeat the check and compare.</div></div>
+  </div>
+  <div class="next"><a href="#home">← Overview</a><a href="#a1">Activity 1 →</a></div>
+</section>
+
+<!-- ================= ACTIVITY 1 ================= -->
+<section class="panel" id="p-a1" data-month="M3 / 12">
+  <div class="eyebrow">Part A · Understand · Q1 · M1–M3</div>
+  <h2 class="sec">Activity 1 When Numbers Whisper</h2>
+  <p class="muted">Understanding Metrics in Context · A. Formal education (blended) · No AI</p>
+  <div class="card lav block" style="margin-top:12px">
+    <p class="quote" style="margin:0">“Lily sees an engagement rate of 3%. Good or bad?”</p>
+    <p style="margin:6px 0 0">It depends — on the goal, the platform, the format and the audience. <span class="muted">(illustrative)</span></p>
+  </div>
+  <div class="grid g2 block">
+    <div class="stack">
+      <p><b>What Lily does.</b> Three 60-minute recorded lectures, each with a 10-question quiz: what common metrics measure (M1), reading them by campaign goal (M2), and by platform, format and audience (M3).</p>
+      <p><b>Why this method.</b> Concepts are taught by lecture; quizzes are retrieval practice. The game is limited practice on one context at a time, and the debrief turns it into principles.</p>
+      <p class="indicator">Builds the Developing indicator — “Explains what common metrics measure and links them to the campaign objective.” — plus the four contexts of the Proficient indicator: goal, platform, format, audience.</p>
+    </div>
+    <div class="card">
+      <div class="eyebrow">M3 on-campus finale game · “Beyond the Numbers”</div>
+      <div class="steps" style="--n:1">
+        <div class="step"><span class="num">1</span><b style="display:inline">Reveal a metric card</b></div>
+        <div class="step"><span class="num">2</span><b style="display:inline">Draw a random context card</b></div>
+        <div class="step"><span class="num">3</span><b style="display:inline">Explain how to read the metric</b></div>
+        <div class="step"><span class="num">4</span><b style="display:inline">The other team: “Go Beyond!”</b></div>
+        <div class="step"><span class="num">5</span><b style="display:inline">Peer referee rules, then feedback</b></div>
+      </div>
+      <p class="note">Evidence: M3 quiz (8 of 10 or more) and individual game records — each learner’s explanation accepted at least twice. Output: a personal context checklist written in the debrief.</p>
+    </div>
+  </div>
+
+  <div class="try block">
+    <div class="eyebrow">Try it · One round of Beyond the Numbers</div>
+    <h3>Draw a card and explain how you would read the metric</h3>
+    <div class="grid g2" style="margin-top:10px">
+      <div class="gcard metric"><div class="k">Metric card</div><h4 id="g1Metric">—</h4><div id="g1MetricSub" class="small" style="opacity:.9"></div></div>
+      <div class="gcard context" id="g1CtxBox"><div class="k" style="color:var(--teal)">Context card</div><div id="g1Ctx" class="small">Draw a context card to start.</div></div>
+    </div>
+    <div class="btns"><button class="btn ghost" id="g1New">New metric card</button><button class="btn" id="g1Draw">Draw a context card</button></div>
+    <div class="reveal" id="g1Form">
+      <p class="small" style="margin-top:6px"><b>Your explanation</b> — the sentence frame used in the game:</p>
+      <p class="small muted">“In this context, this metric is a (more / less) important signal, because ___. So we should compare it with ___.”</p>
+      <textarea id="g1Text" placeholder="Type your explanation…"></textarea>
+      <div class="btns"><button class="btn teal" id="g1Ref">Ask the referee</button></div>
+      <div class="reveal card mint" id="g1RefBox"></div>
+    </div>
+    <p class="note">Sample cards written for this site to show how a round works. In the program, alumni practitioners write and review every card and its referee notes.</p>
+  </div>
+  <div class="next"><a href="#entry">← Entry</a><a href="#a2">Activity 2 →</a></div>
+</section>
+
+<!-- ================= ACTIVITY 2 ================= -->
+<section class="panel" id="p-a2" data-month="M6 / 12">
+  <div class="eyebrow">Part A · Understand · Q2 · M4–M6</div>
+  <h2 class="sec">Activity 2 Connect the Dots</h2>
+  <p class="muted">Finding the Context Behind the Metrics · D. Interpersonal relationships (mentoring or coaching) · Claude only prepares coach-reviewed data</p>
+  <p class="block" style="margin-top:14px">Activity 1 focuses on interpreting individual contextual factors, while Activity 2 focuses on integrating multiple factors to analyze overall campaign performance.</p>
+  <div class="steps block" style="--n:3;margin-top:12px">
+    <div class="step"><b>M4</b><span>Coach demo + structured form</span></div>
+    <div class="step"><b>M5</b><span>Question-only form + peer review</span></div>
+    <div class="step"><b>M6</b><span>Alone, no form</span></div>
+  </div>
+  <div class="grid g2 block">
+    <div class="stack">
+      <p><b>What Lily does.</b> A one-page interpretation of a full campaign dataset each month, with written coach feedback and a 30-minute group coaching call. Support fades from M4 to M6.</p>
+      <p><b>Why this method.</b> Practice with feedback and a model to imitate. Contexts interact, so learners practice the whole task; a new campaign each month builds transfer for an open skill.</p>
+      <p class="small"><span class="pill blue">◆ Korea</span> may use data from an account the learner runs (coach-checked)<br><span class="pill blue">◇ Norway</span> one dataset is a GA4 report</p>
+    </div>
+    <div class="card">
+      <div class="eyebrow">Output · M6 success criteria</div>
+      <p style="margin-bottom:6px"><b>Portfolio 1: M6 performance interpretation</b></p>
+      <p class="small">(1) How each of the four contexts changes the reading of a metric, with data<br>(2) At least one case where two or more contexts together change one metric’s reading<br>(3) No judgment based only on numbers going up or down</p>
+      <p class="indicator small" style="margin:0">“Interprets performance metrics in the context of campaign goals, platforms, content formats, and audiences, and explains how these factors affect the assessment of campaign results.”</p>
+    </div>
+  </div>
+
+  <div class="try block">
+    <div class="eyebrow">Try it · A mini M6</div>
+    <h3>Write a short interpretation, then check it against the three criteria</h3>
+    <div class="card" style="margin-top:10px">
+      <p class="small" style="margin-bottom:6px"><b>Fictional campaign · four weeks</b></p>
+      <div class="scroll" style="border:0"><table class="tbl">
+        <tr><th>Context</th><th>Information</th></tr>
+        <tr><td>Goal</td><td>Get people who already follow the brand to try a new refill pack (link clicks to the refill page)</td></tr>
+        <tr><td>Platform</td><td>Instagram</td></tr>
+        <tr><td>Format</td><td>3 Reels and 6 Stories with a link sticker</td></tr>
+        <tr><td>Audience</td><td>Existing followers, mostly aged 25–34</td></tr>
+      </table></div>
+      <div class="scroll" style="border:0;margin-top:8px"><table class="tbl">
+        <tr><th>Metric</th><th>This campaign</th><th>Previous campaign (product launch, mostly paid reach to new audiences)</th></tr>
+        <tr><td>Reel reach (average)</td><td>18,000</td><td>42,000</td></tr>
+        <tr><td>Reel engagement rate</td><td>5.1%</td><td>3.2%</td></tr>
+        <tr><td>Story link clicks (total)</td><td>1,150</td><td>640</td></tr>
+        <tr><td>Story views (total)</td><td>24,000</td><td>51,000</td></tr>
+      </table></div>
+      <p class="note">All figures are fictional and made for this exercise.</p>
+    </div>
+    <textarea id="a2Text" style="margin-top:10px" placeholder="Is this campaign doing well? Explain how the goal, platform, format and audience change how you read these numbers…"></textarea>
+    <div class="btns"><button class="btn" id="a2Check">Check my interpretation</button></div>
+    <div class="reveal" id="a2Box">
+      <p class="small" style="margin-top:6px"><b>Self-check against the M6 criteria</b> — tick what your text actually does.</p>
+      <label class="opt"><input type="checkbox"> <span>(1) I explained how <b>each</b> of the four contexts (goal, platform, format, audience) changes the reading of at least one metric, using the data.</span></label>
+      <label class="opt"><input type="checkbox"> <span>(2) I gave at least one case where <b>two or more contexts together</b> change how one metric should be read.</span></label>
+      <label class="opt"><input type="checkbox"> <span>(3) I made <b>no</b> judgment based only on a number going up or down.</span></label>
+      <div class="card sky small" style="margin-top:10px"><b>Questions a coach would ask you.</b> The previous campaign had a different goal and a different audience — is it a fair benchmark for reach? Which metric is closest to this campaign’s goal? What would you compare it with instead?</div>
+    </div>
+  </div>
+  <div class="next"><a href="#a1">← Activity 1</a><a href="#a3">Activity 3 →</a></div>
+</section>
+
+<!-- ================= ACTIVITY 3 ================= -->
+<section class="panel" id="p-a3" data-month="M9 / 12">
+  <div class="eyebrow">Part A · Verify · Q3 · M7–M9</div>
+  <h2 class="sec">Activity 3 Line by Line</h2>
+  <p class="muted">AI Report Verification &amp; Revision Project · C. Job experiences (on-the-job experience) · Claude writes the reports learners verify</p>
+  <div class="card lav block" style="margin-top:12px">
+    <p class="quote" style="margin:0">“An AI report says the campaign clearly worked. Would Lily share it?”</p>
+    <p style="margin:6px 0 0">Not before checking it against the data and the campaign context.</p>
+  </div>
+  <div class="steps block" style="--n:3;margin-top:12px">
+    <div class="step"><b>M7 · Learn to verify</b><span>Online modules + answer-keyed practice report</span></div>
+    <div class="step"><b>M8 · With support</b><span>Partner topic; verify every claim; practitioner feedback</span></div>
+    <div class="step"><b>M9 · Alone</b><span>Verify first, then compare with an independent assessor</span></div>
+  </div>
+  <div class="grid g2 block">
+    <div class="stack">
+      <p><b>What Lily does.</b> Pulls out each claim in a Claude report built from public data and records whether it is supported, differs from data or cannot be verified, and whether context is missing, with the source — then revises the report before sharing it.</p>
+      <p><b>Why this method.</b> For a job seeker, on-the-job training means a real task with a real reviewer. Support is reduced step by step, and learners study what they missed in M8 before M9 (error-management training).</p>
+      <p class="small"><span class="pill blue">▲ Myanmar</span> present and defend the verified report, in addition to the verification itself</p>
+    </div>
+    <div class="card">
+      <div class="eyebrow">Output · M9 success criteria</div>
+      <p style="margin-bottom:6px"><b>Portfolio 2: M9 verified report</b></p>
+      <p class="small">(1) A verdict and evidence recorded for every claim<br>(2) 80%+ claim-level agreement with an independent judge<br>(3) No major problem left unresolved in the final report</p>
+      <p class="note" style="margin:0">Public data only — partner companies give a topic and feedback, never internal data.</p>
+    </div>
+  </div>
+
+  <div class="try block">
+    <div class="eyebrow">Try it · An M7-style practice report</div>
+    <h3>Check each AI claim against the source data and the campaign goal</h3>
+    <div class="grid g2" style="margin-top:10px">
+      <div class="card">
+        <p class="small" style="margin-bottom:6px"><b>Campaign brief.</b> Four-week Instagram campaign for a fictional snack brand. Goal: get people to ask about and save the new flavor (saves and product questions).</p>
+        <div class="scroll" style="border:0"><table class="tbl">
+          <tr><th>Week</th><th>Reach</th><th>Saves</th><th>Comments</th></tr>
+          <tr><td>1</td><td>12,000</td><td>210</td><td>80</td></tr>
+          <tr><td>2</td><td>15,500</td><td>280</td><td>95</td></tr>
+          <tr><td>3</td><td>14,800</td><td>330</td><td>120</td></tr>
+          <tr><td>4</td><td>21,000</td><td>420</td><td>160</td></tr>
+        </table></div>
+        <p class="note">Source data: public post insights shared by the creator. No sales data, posting times or comment content are available. All figures fictional.</p>
+      </div>
+      <div class="card sky">
+        <div class="eyebrow" style="color:var(--blue-d)">AI-generated summary (practice)</div>
+        <p class="small" style="margin:0">“Reach grew every week, from 12,000 in week 1 to 21,000 in week 4. Total saves over the campaign were 1,240, and the save rate improved from week 1 to week 4. Comments doubled from week 1 to week 4, so the campaign succeeded. Week 4 performed best because the influencer posted at the optimal time, and the campaign clearly increased sales.”</p>
+      </div>
+    </div>
+    <div id="claims"></div>
+    <div class="btns"><button class="btn" id="a3Check">Show the answer key</button><button class="btn ghost" id="a3Reset">Reset</button></div>
+    <p class="note" id="a3Score"></p>
+    <p class="note">In the program, practice reports are drafted by Claude and reviewed by a practitioner before use. From M8, learners request reports themselves from public data.</p>
+  </div>
+  <div class="next"><a href="#a2">← Activity 2</a><a href="#a4">Activity 4 →</a></div>
+</section>
+
+<!-- ================= ACTIVITY 4 ================= -->
+<section class="panel" id="p-a4" data-month="M10 / 12">
+  <div class="eyebrow">Part A · Decide · Q4 · M10 training → M11 transfer</div>
+  <h2 class="sec">Activity 4 Make Your Case</h2>
+  <p class="muted">Social Media Marketing Decision Simulation · A. Formal education + AI-supported practice: Claude mock client (M10)</p>
+  <div class="card lav block" style="margin-top:12px">
+    <p class="quote" style="margin:0">“Four influencers, one budget. Would Lily pick the biggest account?”</p>
+    <p style="margin:6px 0 0">Not before comparing them against the campaign goal and target audience. <span class="muted">(illustrative)</span></p>
+  </div>
+  <div class="grid g2 block">
+    <div class="stack">
+      <p>Three agencies compete to recommend one influencer to <b>TikkiTakka Skin</b>, a fictional skincare client. Below you can walk through the M10 day as a learner: read the brief, compare four candidates, rehearse with the client, handle a brief update and write your own recommendation.</p>
+      <p class="small"><b>Learning objective · Area 3 Proficient.</b> Given a fictional client brief, four influencer profiles and a five-criteria comparison sheet; after the brief changes, working alone, before team discussion and without AI, each learner compares influencer options against the campaign goal and target audience using multiple criteria, recommends one option, and explains the trade-offs — within 20 minutes.</p>
+    </div>
+    <div class="card">
+      <div class="eyebrow">The day · 09:30–16:30</div>
+      <table class="tbl" style="font-size:13px">
+        <tr><td><b>(1) Mission Brief</b></td><td>09:30–10:00</td></tr>
+        <tr><td><b>(2) Practice</b></td><td>10:00–10:55</td></tr>
+        <tr><td><b>(3) First Decision</b></td><td>11:05–12:10</td></tr>
+        <tr><td><b>(4) Client Rehearsal</b> · AI</td><td>13:10–14:05</td></tr>
+        <tr><td><b>(5) The IF Moment</b> · Level 2</td><td>14:15–14:55</td></tr>
+        <tr><td><b>(6) Pitch &amp; Panel Vote</b> · Level 1</td><td>14:55–16:30</td></tr>
+      </table>
+      <p class="note" style="margin-bottom:0">15 learners in three teams of five · one alumni trainer who never plays the client · all brands and people fictional.</p>
+    </div>
+  </div>
+
+  <div class="try block">
+    <div class="eyebrow">Try it · Walk through the day</div>
+    <div class="flow" id="flow">
+      <button data-s="1"><b>(1) Brief</b><span>Read the client brief</span></button>
+      <button data-s="2"><b>(2) Practice</b><span>Judge two recommendations</span></button>
+      <button data-s="3"><b>(3) Compare</b><span>Four candidates · 5 criteria</span></button>
+      <button data-s="4"><b>(4) Rehearse</b><span>Meet the AI client</span></button>
+      <button data-s="5"><b>(5) IF Moment</b><span>Brief update · write alone</span></button>
+      <button data-s="6"><b>(6) Pitch &amp; Debrief</b><span>Reflect and take home</span></button>
+    </div>
+
+    <!-- step 1 -->
+    <div class="substep" data-s="1">
+      <div class="email" style="margin-top:8px">
+        <div class="hd"><span>From: TikkiTakka Skin Brand Team</span><span>To: your agency team</span></div>
+        <div class="bd">
+          <div class="subj">Request for an influencer recommendation</div>
+          <p class="small" style="margin:0">Hi team, we are launching a new serum and would like your agency to recommend one Instagram creator for the launch. Our brief is attached; profiles of four candidate creators will follow. We look forward to your proposal.</p>
+        </div>
+      </div>
+      <div class="card brief" style="margin-top:12px">
+        <div class="eyebrow">Client brief · New product launch (fictional)</div>
+        <dl>
+          <dt>Brand</dt><dd>TikkiTakka Skin (fictional skincare brand)</dd>
+          <dt>Product</dt><dd>Barrier Calm Serum, for sensitive, easily irritated skin (30 ml, $28)</dd>
+          <dt>Launch market</dt><dd>One fictional domestic market, referred to as the “Launch Market” throughout this case. The campaign targets consumers in this market only.</dd>
+          <dt>Campaign period</dt><dd>4 weeks from launch</dd>
+          <dt>Campaign goal</dt><dd>Encourage product consideration by generating saves and meaningful product-related questions. Reach alone is not our priority.</dd>
+          <dt>Target audience</dt><dd>Adults aged 20–29 in the Launch Market with sensitive skin who are new to building a skincare routine. They prefer honest, ingredient-based information, short videos, and authentic reviews.</dd>
+          <dt>Brand personality</dt><dd>Calm, honest, evidence-informed. Avoid exaggerated claims, promises of instant results, and heavily filtered before-and-after content.</dd>
+          <dt>Platform &amp; deliverables</dt><dd>Instagram: 1 Reel + 3 Stories during the campaign.</dd>
+          <dt>Budget</dt><dd>Up to USD 3,000 for one influencer, including all agreed deliverables and fees.</dd>
+          <dt>What we need</dt><dd>Compare four influencer candidates against our goal and target audience, recommend one using multiple criteria, and explain the trade-offs of your choice.</dd>
+        </dl>
+      </div>
+      <p class="small" style="margin-top:12px"><b>Your first task.</b> In your own words, what is the campaign goal and who is the target audience?</p>
+      <textarea data-note="s1" placeholder="Goal: … / Target audience: …"></textarea>
+      <div class="btns"><button class="btn" data-go="2">Next: Practice →</button></div>
+    </div>
+
+    <!-- step 2 -->
+    <div class="substep" data-s="2">
+      <p class="small" style="margin-top:8px">Before the main case, the trainer shows a short demo from a different industry. Teams decide which recommendation is more convincing — before any explanation.</p>
+      <div class="card brief">
+        <div class="eyebrow">Demo brief · Lumen Notes (fictional stationery brand)</div>
+        <dl>
+          <dt>Product</dt><dd>A new study planner</dd>
+          <dt>Goal</dt><dd>Get university students to save our planner tips for later use.</dd>
+          <dt>Target</dt><dd>University students</dd>
+          <dt>Deliverable · Budget</dt><dd>1 Instagram Reel · up to USD 1,000</dd>
+        </dl>
+        <div class="scroll" style="margin-top:6px"><table class="tbl">
+          <tr><th></th><th>X · Mia</th><th>Y · Theo</th></tr>
+          <tr><td>Followers</td><td>150K</td><td>20K</td></tr>
+          <tr><td>Content</td><td>General lifestyle, flashy hauls</td><td>Study vlogs, calm study records</td></tr>
+          <tr><td>University students among followers</td><td>About 30%</td><td>About 70%</td></tr>
+          <tr><td>Reel reach (average)</td><td>50,000</td><td>8,000</td></tr>
+          <tr><td>Save rate</td><td>1.0% (about 500 saves)</td><td>5.0% (about 400 saves)</td></tr>
+          <tr><td>Sponsored posts</td><td>2 per week</td><td>1 per month</td></tr>
+          <tr><td>Fee</td><td>$950</td><td>$400</td></tr>
+        </table></div>
+        <p class="note">Performance figures are based on each creator’s 10 most recent Reels within the past 90 days. Save rate = total saves ÷ total reach. All figures fictional.</p>
+      </div>
+      <div class="grid g2" style="margin-top:12px">
+        <div class="card"><div class="eyebrow">Recommendation ①</div><p class="small" style="margin:0">“Choose Mia. She has over seven times more followers and much higher reach.”</p></div>
+        <div class="card"><div class="eyebrow">Recommendation ②</div><p class="small" style="margin:0">“Choose Theo. Our goal is to get university students to save planner tips, so I prioritized audience fit and saves in context. About 70% of Theo’s followers are university students, compared with about 30% of Mia’s, and his study-vlog content fits a study planner. His past Reels had a 5% save rate, compared with Mia’s 1%. I also checked sponsorship history and cost: Theo posts sponsored content less often, though that alone doesn’t prove better results, and charges $400 versus Mia’s $950, both within budget. Trade-off: Mia’s past Reels averaged more total saves (about 500 vs 400) and far greater reach, and we can’t tell how many of either creator’s saves came from students. I accept Theo’s lower observed total saves and reach because his followers and content are more closely aligned with our target. If our goal were broad awareness, I would give Mia’s reach more weight.”</p></div>
+      </div>
+      <p class="small" style="margin-top:12px"><b>Which recommendation is more convincing for this campaign, and why?</b></p>
+      <textarea data-note="s2" placeholder="I find recommendation … more convincing because …"></textarea>
+      <div class="btns"><button class="btn teal" id="demoReveal">Hear the trainer</button></div>
+      <div class="reveal card mint small" id="demoBox">“Recommendation ② is more convincing not because it chose Theo, but because it starts from the goal and target, compares several criteria, admits Mia’s strengths, and explains why it still chose Theo. A recommendation for Mia could also be convincing if it were reasoned this way.”<br><span class="muted">In the program, teams then practice on a separate café case and rewrite one trade-off sentence after feedback.</span></div>
+      <div class="btns"><button class="btn ghost" data-go="1">← Back</button><button class="btn" data-go="3">Next: Compare the candidates →</button></div>
+    </div>
+
+    <!-- step 3 -->
+    <div class="substep" data-s="3">
+      <p class="small" style="margin-top:8px">Four creators, one budget. Compare them against the goal and target in the brief. Comments and captions are examples from each creator’s past posts about other products and do not represent all posts.</p>
+      <div class="grid g2" id="cands"></div>
+      <p class="note">Performance: Reels = each creator’s 10 most recent Reels within 90 days; feed posts = 10 most recent feed posts. Average reach = total reach ÷ 10; save rate = total saves ÷ total reach; product-question share = product-question comments ÷ all comments on those Reels. Quotes include 1 Reel + 3 Stories and all fees. All names and figures fictional.</p>
+      <div class="card" style="margin-top:12px">
+        <div class="eyebrow">Your comparison table · five criteria, no fixed weights</div>
+        <p class="small">Note what each candidate offers or lacks on each criterion, judged against the goal and target. Your notes stay in this browser.</p>
+        <div class="scroll"><table class="ws" id="wsTable"></table></div>
+      </div>
+      <p class="small" style="margin-top:12px"><b>Your provisional pick and its trade-off.</b> In the program, teams agree on one candidate here, after each member has formed a view.</p>
+      <textarea data-note="s3" placeholder="Provisional pick: … / What we gain: … / What we give up compared with …"></textarea>
+      <div class="btns"><button class="btn ghost" data-go="2">← Back</button><button class="btn" data-go="4">Next: Client rehearsal →</button></div>
+    </div>
+
+    <!-- step 4 -->
+    <div class="substep" data-s="4">
+      <div class="grid g2" style="margin-top:8px">
+        <div class="stack">
+          <h3>Pre-pitch meeting with the AI client</h3>
+          <p class="small">In the program, each team opens its own chat on a shared Claude page, <b>“TikkiTakka Skin Brand Manager”</b>. It plays the client and is instructed to ask only why-questions about your provisional pick, using the brief and the four candidate profiles. It does not write recommendations, score, give feedback, invent information, or know about any upcoming change. Every team member answers at least once, and the team logs one hard question and a revised answer. The trainer sets the scenario, reviews the logs and gives the feedback.</p>
+          <div class="btns">
+            <a class="btn" id="geminiLink" href="https://claude.ai/artifact/LdZ6xuGPR2gjaNJqN8mGkV" target="_blank" rel="noopener" style="text-decoration:none">Meet the TikkiTakka Skin Brand Manager ↗</a>
+            <button class="btn ghost" id="copyPrompt">Copy the client prompt</button>
+          </div>
+          <p class="note" id="copyMsg">The page opens in a new tab. Anyone can read the brief and profiles there; to chat, select “Log in” at its top right (a free Claude account works). Each chat stays only in your browser tab. If you cannot log in, paste the client prompt into an AI chat you use. Use the AI only as the client — keep your recommendation your own.</p>
+        </div>
+        <div class="card sky">
+          <div class="eyebrow" style="color:var(--blue-d)">Backup · printed client question cards</div>
+          <ul class="small" style="margin:0;padding-left:18px" id="qcards"></ul>
+        </div>
+      </div>
+      <p class="small" style="margin-top:12px"><b>Rehearsal log.</b> One hard question you received, and your revised answer.</p>
+      <textarea data-note="s4" placeholder="Hard question: … / Revised answer: …"></textarea>
+      <div class="btns"><button class="btn ghost" data-go="3">← Back</button><button class="btn" data-go="5">Next: The IF Moment →</button></div>
+    </div>
+
+    <!-- step 5 -->
+    <div class="substep" data-s="5">
+      <div class="grid g2" style="margin-top:8px">
+        <div class="email">
+          <div class="hd"><span>From: TikkiTakka Skin Brand Team</span><span>To: your agency team</span></div>
+          <div class="bd">
+            <div class="subj">Brief update: target audience</div>
+            <p class="small">Hi team,</p>
+            <p class="small">Following an internal review, we are updating one part of the brief. Please change the target age from <b>20–29</b> to <b>25–34</b>.</p>
+            <p class="small">All other parts of the target audience (Launch Market, sensitive skin, new to building a skincare routine) and the rest of the brief stay the same.</p>
+            <p class="small" style="margin:0">Please reflect this change in your final proposal.</p>
+          </div>
+        </div>
+        <div class="stack">
+          <div class="update"><div class="k">BRIEF UPDATE CARD</div><b>Target age: 20–29 → 25–34</b><span class="small">Everything else stays the same.</span></div>
+          <div class="card small"><b>1 · Write your own recommendation · 20 min.</b> Alone, before any team discussion. Allowed: client brief, update card, four candidate cards, your comparison table, 5-Criteria Card. Not allowed: teammates, AI.<div style="display:flex;align-items:center;gap:10px;margin-top:8px"><span class="timer" id="timer">20:00</span><button class="btn ghost" id="timerBtn">Start timer</button></div></div>
+        </div>
+      </div>
+      <div class="stack" style="margin-top:12px">
+        <label class="small"><b>(1) Compare.</b> How do at least three of the four candidates compare against the goal and the updated target?</label>
+        <textarea data-note="r1"></textarea>
+        <label class="small"><b>(2) Recommend.</b> Which candidate do you recommend, and on which two or more criteria, supported by the provided information?</label>
+        <textarea data-note="r2"></textarea>
+        <label class="small"><b>(3) Trade-offs.</b> What does your choice gain and give up compared with at least one alternative?</label>
+        <textarea data-note="r3"></textarea>
+      </div>
+      <div class="btns"><button class="btn teal" id="chkBtn">Check against the three items</button></div>
+      <div class="reveal" id="chkBox">
+        <p class="small" style="margin-top:6px"><b>The trainer’s three-item checklist</b> (Level 2). Tick only what your recommendation actually shows. Keeping or changing the candidate are both accepted if the reasoning holds.</p>
+        <label class="opt"><input type="checkbox"> <span>(1) Compares at least three of the four candidates against the goal and the <b>updated</b> target audience.</span></label>
+        <label class="opt"><input type="checkbox"> <span>(2) Recommends one using at least two criteria <b>supported by the provided information</b>, with no factual contradictions.</span></label>
+        <label class="opt"><input type="checkbox"> <span>(3) Explains the benefits and drawbacks of the choice <b>relative to at least one alternative</b>.</span></label>
+        <p class="note">In the program, the trainer scores the recommendation afterward and returns written feedback within a week. Here, the check is yours alone.</p>
+      </div>
+      <div class="btns"><button class="btn ghost" data-go="4">← Back</button><button class="btn" data-go="6">Next: Debrief →</button></div>
+    </div>
+
+    <!-- step 6 -->
+    <div class="substep" data-s="6">
+      <div class="grid g2" style="margin-top:8px">
+        <div class="stack">
+          <h3>Pitch, panel vote and debrief</h3>
+          <p class="small">Each team pitches for 5 minutes and answers 10 minutes of questions. The other two teams act as the client panel and vote; the vote is not scored. The debrief compares the three teams’ reasoning — there is no “right candidate” announced.</p>
+          <div class="card lav small">
+            <b>Debrief questions</b>
+            <ol style="margin:6px 0 0;padding-left:18px">
+              <li>Which criteria did you use first, and what did you recheck after the brief changed? If your own view differed from your team’s decision, why?</li>
+              <li>Compared with a candidate you did not recommend, what did your choice gain and give up?</li>
+              <li>If you ran a different campaign next, which comparison method would you use again?</li>
+            </ol>
+          </div>
+          <textarea data-note="s6" placeholder="My reflection…"></textarea>
+        </div>
+        <div class="stack">
+          <div class="card">
+            <div class="eyebrow teal">Take-home · 5-Criteria Card</div>
+            <div class="five">
+              <div>Audience fit</div><div>Brand fit and content style</div><div>Performance metrics in context</div><div>Past sponsored content</div><div>Cost</div>
+            </div>
+            <p class="small" style="margin:8px 0 0"><b>Ask:</b> “Which criterion does this information belong to?” The back holds the three behaviors as a before/after self-check.</p>
+          </div>
+          <div class="card mint small"><b>After the day.</b> Written feedback within one week · eight short client-style prompts over the next four weeks · M11: an independent recommendation on a real public campaign, shared with peers, with each fact marked confirmed (with source) or assumed — Portfolio 3.</div>
+          <div class="btns"><button class="btn ghost" id="dlNotes">Download my notes (.txt)</button><button class="btn ghost" id="clrNotes">Clear my notes</button></div>
+        </div>
+      </div>
+      <div class="btns"><button class="btn ghost" data-go="5">← Back</button><a class="btn" href="#exit" style="text-decoration:none">Go to Exit →</a></div>
+    </div>
+  </div>
+  <div class="next"><a href="#a3">← Activity 3</a><a href="#exit">Exit →</a></div>
+</section>
+
+<!-- ================= EXIT ================= -->
+<section class="panel" id="p-exit" data-month="M12 / 12">
+  <div class="hero">
+    <div>
+      <div class="eyebrow">Q4 · M12 · Assessment</div>
+      <h2 class="sec">Exit Assessment — meet Lily again</h2>
+      <p class="lead">Twelve months later, she can interpret, verify and decide — and show the work. <span class="pill">Proficient · to be verified</span></p>
+      <div class="grid g2" style="margin-top:10px">
+        <div class="card small"><b>M6</b> performance interpretation</div>
+        <div class="card small"><b>M9</b> verified AI report</div>
+        <div class="card small"><b>M11</b> evidence-based recommendation</div>
+        <div class="card small"><b>Exit</b> judgment on new cases</div>
+      </div>
+      <p class="muted" style="margin-top:8px">We do not promise a job: interviews and offers are tracked as Level 4 results.</p>
+    </div>
+    <div>
+      <div class="lily"><span class="pill tag">M12 · Exit profile</span><img src="assets/lily-m12.webp" alt="Illustration of Lily, a fictional persona, at the end of the program"></div>
+      <p class="muted" style="text-align:center;margin-top:6px">Fictional persona · AI-generated image</p>
+    </div>
+  </div>
+  <div class="block">
+    <div class="eyebrow">How the Exit decides D or P · short cases scored item by item</div>
+    <div class="grid g3">
+      <div class="card"><b>Area 1 · 35 min</b><p class="small" style="margin:4px 0 0">Interpret a one-page performance sheet; all four contexts are in the materials, but learners are not told which matter.</p></div>
+      <div class="card"><b>Area 4 · 40 min</b><p class="small" style="margin:4px 0 0">Verify a short AI analysis with eight claims: at least 7 of 8 must match the answer key, with no major problem left unresolved.</p></div>
+      <div class="card"><b>Area 3 · 30 min</b><p class="small" style="margin:4px 0 0">Recommend one of four new candidates, using the same three items as Part B.</p></div>
+    </div>
+    <p class="small" style="margin-top:10px"><b>Rule.</b> All Proficient items met → Proficient. Otherwise a separate Developing check decides between Developing and “Developing behavior not yet observed”.<br><b>Same conditions both times.</b> Same task types, time, answer forms and scoring; no personal job aids, no AI; answers online, with an interview on one answer. Exit answers are scored before the assessor sees Entry results.</p>
+  </div>
+  <div class="try block">
+    <div class="eyebrow">Try it · Repeat the self-assessment</div>
+    <h3>Has your view of yourself changed?</h3>
+    <p class="small">The same check as Entry. In the program, the self-assessment is repeated at Exit and compared with the assessor’s judgment.</p>
+    <div id="selfExit"></div>
+    <div class="btns"><button class="btn" data-save="exit">Compare with my Entry profile</button></div>
+    <div class="reveal" id="cmpBox"></div>
+  </div>
+  <div class="next"><a href="#a4">← Activity 4</a><a href="#plan">Evaluation &amp; AI →</a></div>
+</section>
+
+<!-- ================= PLAN ================= -->
+<section class="panel" id="p-plan" data-month="M12 / 12">
+  <div class="eyebrow">Evaluation plan</div>
+  <h2 class="sec">Levels 1–2 inside Part B, Levels 3–4 across Part A, and a pre/post design from Entry to Exit</h2>
+  <div class="scroll block" style="margin-top:12px"><table class="tbl">
+    <tr><th>Scope</th><th>Level</th><th>What we collect</th><th>From whom, when</th></tr>
+    <tr><td rowspan="2">Part B<br>M10 day</td><td>1 · Reaction</td><td>Three-item survey: usefulness, intention to use, most and least helpful session</td><td>All learners, end of the day</td></tr>
+    <tr><td>2 · Learning</td><td>Individual recommendation from Session (5), scored with a three-item checklist built from the Area 3 Proficient indicator</td><td>All 15 learners; day trainer; feedback within one week</td></tr>
+    <tr><td rowspan="2">Part A<br>12 months</td><td>3 · Behavior</td><td>Ratings of the three portfolio pieces (M6, M9, M11) against each area’s criteria</td><td>Alumni assessor who does not coach the learner: Area 1 at M6, all three at M12</td></tr>
+    <tr><td>4 · Results</td><td>Outcomes: interviews, internships or jobs obtained · Supporting context: number of applications and portfolio use</td><td>Center short survey at M12 and 6 months after completion</td></tr>
+    <tr><td colspan="2">Design · pretest and post-test</td><td>Entry self-assessment repeated at Exit, plus three work-sample cases at Entry and new parallel cases at Exit · no comparison group</td><td>Same assessor, M1 and M12</td></tr>
+    <tr><td colspan="2">ROI · optional</td><td>Assuming Center funding: about 45 hours over 12 months and own travel, no participation fee · benefit: three job-relevant portfolio pieces and an assessment against the Proficient criteria</td><td>—</td></tr>
+  </table></div>
+  <div class="grid g2 block">
+    <div class="card"><div class="eyebrow">What this can and cannot show</div><p class="small"><b>Can.</b> Whether each learner’s performance changed, and whether it met the Proficient criteria at M12.</p><p class="small" style="margin:0"><b>Cannot.</b> Without a comparison group, that the program caused the change. Online answers cannot fully rule out outside help. Portfolio ratings show applied work, not direct observation on the job.</p></div>
+    <div class="card"><div class="eyebrow">What it takes to run</div><p class="small">One trainer, one room, one free AI page on the M10 day: no company data, no extra role-players.</p><p class="small" style="margin:0"><b>Learner cost.</b> No participation fee if the Center approves funding; learners invest their time and cover travel. <b>Center.</b> Trainer compensation within a Center budget, still to be approved · alumni before M1, partners by Q2 (proposed).</p></div>
+  </div>
+  <div class="block">
+    <div class="eyebrow">How we used AI to make this plan</div>
+    <h3>AI helped us check and detail the plan; the team made every design decision</h3>
+    <div class="scroll" style="margin-top:8px"><table class="tbl">
+      <tr><th></th><th>AI helped (Claude · ChatGPT)</th><th>Team decided</th></tr>
+      <tr><td><b>Part A</b></td><td>Checking the roadmap against the lecture criteria; detailing the Activity 1 game rules; suggesting learner time per activity</td><td>Key areas and their order (1 → 4 → 3); number of activities, their development approaches and methods; placement across quarters</td></tr>
+      <tr><td><b>Part B</b></td><td>Checking against the Part B criteria; detailing the simulation mechanics; suggesting time allocations</td><td>Choosing Activity 4 and the client-simulation approach; the scenario, session flow and roles; the final call on every change</td></tr>
+      <tr><td><b>Both</b></td><td>Claude: drafting the slides and this companion site · ChatGPT: generating Lily’s fictional-persona images</td><td>Kept, revised or rejected each output after checking it against the lecture slides</td></tr>
+    </table></div>
+    <p class="muted" style="margin-top:6px">AI used inside the program — Claude in Activity 3 and Part B — is part of the training design, not of how we made this plan.</p>
+  </div>
+  <div class="next"><a href="#exit">← Exit</a><a href="#home">Back to overview ↑</a></div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">Team 3 · Tikki takka · HRD Project 2 · November 26, 2026<br>Companion site to our proposal. All brands, people, cases and figures in the exercises are fictional. Lily is a fictional persona; her images are AI-generated. Notes you type stay in your browser and are not sent anywhere.</div>
+</footer>
+
+<script>
+(function(){
+  var store = {
+    get:function(k,d){try{var v=localStorage.getItem('lily12.'+k);return v?JSON.parse(v):d}catch(e){return d}},
+    set:function(k,v){try{localStorage.setItem('lily12.'+k,JSON.stringify(v))}catch(e){}},
+    del:function(k){try{localStorage.removeItem('lily12.'+k)}catch(e){}}
+  };
+  var mem = {};
+  function save(k,v){mem[k]=v;store.set(k,v)}
+  function load(k,d){return (k in mem)?mem[k]:store.get(k,d)}
+
+  /* ---------- tabs ---------- */
+  var tabs=[].slice.call(document.querySelectorAll('.tab'));
+  var panels=[].slice.call(document.querySelectorAll('section.panel'));
+  function show(id){
+    if(!document.getElementById('p-'+id)) id='home';
+    panels.forEach(function(p){p.classList.toggle('on',p.id==='p-'+id)});
+    tabs.forEach(function(t){var on=t.dataset.tab===id;t.setAttribute('aria-selected',on);if(on)t.scrollIntoView({inline:'center',block:'nearest'})});
+    var p=document.getElementById('p-'+id);document.getElementById('monthTag').textContent=p.dataset.month||'';
+    window.scrollTo({top:0,behavior:'auto'});
+  }
+  tabs.forEach(function(t){t.addEventListener('click',function(){location.hash=t.dataset.tab})});
+  window.addEventListener('hashchange',function(){show(location.hash.slice(1))});
+  show(location.hash.slice(1)||'home');
+
+  /* ---------- self-assessment (Entry / Exit) ---------- */
+  var areas=[
+    {k:'a1',n:'Interpret · Area 1',d:'I can explain what common metrics measure and link them to the campaign objective.',p:'I can interpret performance metrics in the context of campaign goals, platforms, content formats and audiences, and explain how these factors affect the assessment of campaign results.'},
+    {k:'a4',n:'Verify · Area 4',d:'I can check whether figures in a report or AI-generated summary match the original platform data, and flag mismatches.',p:'I can verify AI-assisted conclusions against source data and campaign context, identify unsupported claims or missing context, and revise the analysis before sharing it.'},
+    {k:'a3',n:'Decide · Area 3',d:'I can use basic audience and brand-fit information alongside visible popularity indicators to recommend an option and explain one reason.',p:'I can compare several options against the campaign goal and target audience using multiple criteria, recommend one and explain the trade-offs.'}
+  ];
+  var labels={n:'Not yet',d:'Developing',p:'Proficient'};
+  function renderSelf(el,key){
+    var cur=load('self.'+key,{});
+    el.innerHTML=areas.map(function(a){
+      return '<div class="card" style="margin-top:10px"><b style="color:var(--ink)">'+a.n+'</b>'+
+        ['n','d','p'].map(function(l){
+          var txt=l==='n'?'Neither statement describes me yet.':(l==='d'?a.d:a.p);
+          return '<label class="opt"><input type="radio" name="'+key+a.k+'" value="'+l+'"'+(cur[a.k]===l?' checked':'')+'> <span><b>'+labels[l]+'.</b> '+txt+'</span></label>';
+        }).join('')+'</div>';
+    }).join('');
+    el.addEventListener('change',function(e){var v=load('self.'+key,{});v[e.target.name.replace(key,'')]=e.target.value;save('self.'+key,v)});
+  }
+  renderSelf(document.getElementById('selfEntry'),'entry');
+  renderSelf(document.getElementById('selfExit'),'exit');
+  document.querySelector('[data-save="entry"]').addEventListener('click',function(){document.getElementById('entrySaved').classList.add('on')});
+  document.querySelector('[data-save="exit"]').addEventListener('click',function(){
+    var en=load('self.entry',{}),ex=load('self.exit',{}),box=document.getElementById('cmpBox');
+    var rows=areas.map(function(a){return '<tr><td>'+a.n+'</td><td>'+(en[a.k]?labels[en[a.k]]:'—')+'</td><td>'+(ex[a.k]?labels[ex[a.k]]:'—')+'</td></tr>'}).join('');
+    box.innerHTML='<div class="scroll"><table class="tbl"><tr><th>Area</th><th>Entry (self)</th><th>Exit (self)</th></tr>'+rows+'</table></div><p class="note">A self-view, not a judgment. In the program, the final Developing / Proficient decision comes from the Exit cases, scored before the assessor sees Entry results.</p>';
+    box.classList.add('on');
+  });
+
+  /* ---------- Activity 1 game ---------- */
+  var cards=[
+    {m:'Reel engagement rate: 3.0%',s:'Last month’s Reels on this account averaged 4.0%.',c:[
+      {t:'Goal · Reach people who have never heard of the brand',r:'A strong explanation notes that when the goal is to reach new people, reach and the share of non-followers reached matter more than engagement rate, and that engagement rate often falls when content reaches people who do not know the account. It compares engagement with how reach changed, rather than judging 3.0% on its own.'},
+      {t:'Goal · Deepen engagement with existing community members',r:'A strong explanation notes that engagement rate is close to this goal, so a drop below the account’s own recent average is a signal worth checking. It compares the figure with the same format’s past Reels and asks what changed (topic, timing, audience reached).'}]},
+    {m:'Video completion rate: 25%',s:'Share of viewers who watched to the end.',c:[
+      {t:'Format · A 60-second explainer video',r:'A strong explanation notes that completion naturally falls as videos get longer, so 25% for a 60-second video should be compared with the account’s other videos of similar length, and that average watch time may tell more than completion alone.'},
+      {t:'Format · An 8-second short loop',r:'A strong explanation notes that very short videos usually show high completion, so 25% may signal that viewers left in the first seconds. It compares with other short videos and looks at the opening seconds.'}]},
+    {m:'Link click-through rate: 0.6%',s:'Story link sticker clicks ÷ Story views.',c:[
+      {t:'Audience · Mostly existing followers who know the brand',r:'A strong explanation notes that people who already follow the brand often respond more readily, so 0.6% should be compared with past Stories shown to followers before judging it.'},
+      {t:'Audience · Mostly people seeing the brand for the first time',r:'A strong explanation notes that people meeting a brand for the first time often click less, so the right comparison is past campaigns aimed at new audiences, not campaigns aimed at loyal followers.'}]},
+    {m:'New followers this month: +200',s:'The brand account had 12,000 followers.',c:[
+      {t:'Goal · Sell out a limited product within two weeks',r:'A strong explanation notes that follower growth is not the main signal for a short sales goal; link clicks, product questions or sales would be compared first, and +200 is context rather than the verdict.'},
+      {t:'Goal · Build a community on a channel opened this month',r:'A strong explanation notes that follower growth is central for a new community channel, but a first month has no history to compare with, so it would be compared with the plan’s target and with similar new channels.'}]}
+  ];
+  var gi=0,gc=null;
+  function newMetric(){gi=(gi+1+Math.floor(Math.random()*(cards.length-1)))%cards.length;gc=null;
+    document.getElementById('g1Metric').textContent=cards[gi].m;document.getElementById('g1MetricSub').textContent=cards[gi].s;
+    document.getElementById('g1Ctx').textContent='Draw a context card to start.';document.getElementById('g1Form').classList.remove('on');document.getElementById('g1RefBox').classList.remove('on');document.getElementById('g1Text').value='';}
+  gi=Math.floor(Math.random()*cards.length);newMetric();
+  document.getElementById('g1New').addEventListener('click',newMetric);
+  document.getElementById('g1Draw').addEventListener('click',function(){
+    gc=(gc===null)?(Math.random()<.5?0:1):1-gc;var c=cards[gi].c[gc];
+    document.getElementById('g1Ctx').innerHTML='<b style="font-size:16px;color:var(--ink)">'+c.t+'</b>';
+    document.getElementById('g1Form').classList.add('on');document.getElementById('g1RefBox').classList.remove('on');});
+  document.getElementById('g1Ref').addEventListener('click',function(){
+    if(gc===null)return;var b=document.getElementById('g1RefBox');
+    b.innerHTML='<b>Referee notes</b><p class="small" style="margin:4px 0 0">'+cards[gi].c[gc].r+'</p><p class="note" style="margin-bottom:0">Did your explanation say whether the metric matters here and what to compare it with? Press “Draw a context card” again to see the other context for the same metric and how the reading changes.</p>';
+    b.classList.add('on');});
+
+  /* ---------- Activity 2 ---------- */
+  document.getElementById('a2Check').addEventListener('click',function(){document.getElementById('a2Box').classList.add('on')});
+
+  /* ---------- Activity 3 claims ---------- */
+  var claims=[
+    {q:'“Reach grew every week, from 12,000 in week 1 to 21,000 in week 4.”',v:'differs',c:'no',why:'Differs from data: reach fell in week 3 (15,500 → 14,800), so it did not grow every week.'},
+    {q:'“Total saves over the campaign were 1,240.”',v:'supported',c:'no',why:'Supported: 210 + 280 + 330 + 420 = 1,240.'},
+    {q:'“The save rate improved from week 1 to week 4.”',v:'supported',c:'no',why:'Supported: 210 ÷ 12,000 = 1.75% in week 1 and 420 ÷ 21,000 = 2.0% in week 4.'},
+    {q:'“Comments doubled from week 1 to week 4, so the campaign succeeded.”',v:'supported',c:'yes',why:'The numbers are supported (80 → 160), but context is missing: the goal is saves and product questions, and the data does not show how many comments were product questions. “Succeeded” needs that context.'},
+    {q:'“Week 4 performed best because the influencer posted at the optimal time.”',v:'cannot',c:'no',why:'Cannot be verified: the source data has no posting times, so the cause is not supported.'},
+    {q:'“The campaign clearly increased sales.”',v:'cannot',c:'no',why:'Cannot be verified: there is no sales data in the public insights.'}
+  ];
+  var vlab={supported:'Supported',differs:'Differs from data',cannot:'Cannot be verified'};
+  var cl=document.getElementById('claims');
+  cl.innerHTML=claims.map(function(x,i){return '<div class="claim"><div class="q">Claim '+(i+1)+' · '+x.q+'</div><div class="ctrl"><select data-i="'+i+'" data-f="v"><option value="">Verdict…</option><option value="supported">Supported</option><option value="differs">Differs from data</option><option value="cannot">Cannot be verified</option></select><select data-i="'+i+'" data-f="c"><option value="">Context missing?</option><option value="no">No</option><option value="yes">Yes</option></select></div><div class="ans" id="ans'+i+'"></div></div>'}).join('');
+  cl.querySelectorAll('select').forEach(function(s){s.style.width='auto';s.style.minWidth='170px'});
+  document.getElementById('a3Check').addEventListener('click',function(){
+    var ok=0;claims.forEach(function(x,i){
+      var v=cl.querySelector('[data-i="'+i+'"][data-f="v"]').value,c=cl.querySelector('[data-i="'+i+'"][data-f="c"]').value;
+      var match=(v===x.v&&c===x.c);if(match)ok++;
+      var a=document.getElementById('ans'+i);
+      var lab=match?'Matches the key':((v||c)?'Check again':'Not answered');
+      a.innerHTML='<span class="mark '+(match?'ok':'no')+'">'+lab+'</span> · Key: <b>'+vlab[x.v]+'</b>, context missing: <b>'+(x.c==='yes'?'Yes':'No')+'</b><br>'+x.why;a.classList.add('on');});
+    document.getElementById('a3Score').textContent=ok+' of '+claims.length+' claims match the key (a claim matches only when both the verdict and the context judgment match). Next step in the program: revise the summary so no problem is left unresolved.';
+  });
+  document.getElementById('a3Reset').addEventListener('click',function(){cl.querySelectorAll('select').forEach(function(s){s.value=''});cl.querySelectorAll('.ans').forEach(function(a){a.classList.remove('on')});document.getElementById('a3Score').textContent='';});
+
+  /* ---------- Activity 4 ---------- */
+  var C=[
+    {id:'A',n:'Mina',bio:'Trend-focused beauty creator',f:'420K',lm:'55%',ages:[18,32,20,12,18],int:'Trending products, hauls',cm:['“OMG need this 😍”','“Where’s your top from?”','“Does this work on acne-prone skin?”'],sty:'Energetic, trend-driven',cap:'“This serum literally fixed my skin in 3 days!!! 🔥”',reel:['150,000','1.0%','800','10%'],feed:['55,000','0.6%'],sp:'About 8 sponsored posts per month · promoted a competitor’s sensitive-skin serum 2 months ago · always labels ads · messages use strong efficacy claims',fee:'$2,900'},
+    {id:'B',n:'Dana',bio:'Sensitive-skin ingredient explainer',f:'85K',lm:'90%',ages:[3,18,34,30,15],int:'In-depth ingredient analysis, multi-step skincare routines, and comparisons of active ingredients. Many discussions focus on combining products rather than starting a first skincare routine.',cm:['“Can I use this with retinol?”','“Is it fragrance-free?”','“Thanks for explaining 🙏”'],sty:'Calm, explanatory',cap:'“What it does well, what it doesn’t, and who should skip it.”',reel:['38,000','4.5%','150','45%'],feed:['20,000','5.0%'],sp:'About 1 sponsored post per month · no competing products · always labels ads · shares pros and cons',fee:'$3,000'},
+    {id:'C',n:'Sora',bio:'Student’s skincare beginner diary',f:'32K',lm:'92%',ages:[6,38,32,18,6],int:'First routines, student life',cm:['“My skin is sensitive too, did it sting?”','“Which step comes first?”','“cute 💕”'],sty:'Friendly, candid',cap:'“Week 2: less redness, but it pilled under sunscreen.”',reel:['16,000','3.5%','110','35%'],feed:['8,000','2.0%'],sp:'About 2 sponsored posts per month · no competing products · 1 of the last 6 sponsored posts missed the ad label and was corrected after it was pointed out; the others were labeled · focuses on personal use',fee:'$1,200'},
+    {id:'D',n:'Leo',bio:'Minimal aesthetic photography',f:'150K',lm:'75%',ages:[5,22,28,25,20],int:'Minimal lifestyle',cm:['“Your bathroom is goals ✨”','“What’s the shelf brand?”','“Good for dry skin?”'],sty:'Minimal, edited visuals',cap:'“Slow mornings. Simple steps.”',reel:['30,000','1.4%','70','15%'],feed:['60,000','6.0%'],sp:'About 3 sponsored posts per month · no competing products · always labels ads · mood-focused messages',fee:'$2,200'}
+  ];
+  var ageL=['18–19','20–24','25–29','30–34','35+'];
+  document.getElementById('cands').innerHTML=C.map(function(c){
+    return '<div class="cand"><div class="head"><div><div class="name">'+c.id+' · '+c.n+'</div><div class="small muted">'+c.bio+'</div></div><div class="fol">'+c.f+' <small>followers</small></div></div>'+
+    '<h5>Audience</h5><div class="small">Launch Market followers: <b>'+c.lm+'</b> · Interests: '+c.int+'</div>'+
+    '<div class="small muted" style="margin:6px 0 4px">Ages of Launch Market followers</div><div class="ages">'+c.ages.map(function(v,i){return '<div><b>'+v+'%</b>'+ageL[i]+'</div>'}).join('')+'</div>'+
+    '<h5>Comment examples (past posts, other products)</h5>'+c.cm.map(function(x){return '<div class="cmt">'+x+'</div>'}).join('')+
+    '<h5>Content style</h5><div class="small">'+c.sty+' · Caption example: '+c.cap+'</div>'+
+    '<h5>Performance (fictional)</h5><div class="kv"><div>Reel avg reach<b>'+c.reel[0]+'</b></div><div>Reel save rate<b>'+c.reel[1]+'</b></div><div>Reel avg comments<b>'+c.reel[2]+'</b></div><div>Product-question share<b>'+c.reel[3]+'</b></div><div>Feed avg reach<b>'+c.feed[0]+'</b></div><div>Feed save rate<b>'+c.feed[1]+'</b></div></div>'+
+    '<h5>Past sponsored content</h5><div class="small">'+c.sp+'</div>'+
+    '<h5>Quote</h5><div class="small"><b style="color:var(--ink);font-size:16px">'+c.fee+'</b> · 1 Reel + 3 Stories, all fees included</div></div>';
+  }).join('');
+  var crit=['Audience fit','Brand fit & content style','Performance metrics in context','Past sponsored content','Cost'];
+  var ws=load('a4.ws',{});
+  document.getElementById('wsTable').innerHTML='<tr><th>Criterion</th>'+C.map(function(c){return '<th>'+c.id+' · '+c.n+'</th>'}).join('')+'</tr>'+
+    crit.map(function(k,ri){return '<tr><th style="background:#fff">'+k+'</th>'+C.map(function(c,ci){var key=ri+'_'+ci;return '<td><input type="text" data-ws="'+key+'" value="'+(ws[key]||'').replace(/"/g,'&quot;')+'"></td>'}).join('')+'</tr>'}).join('');
+  document.getElementById('wsTable').addEventListener('input',function(e){if(e.target.dataset.ws){var w=load('a4.ws',{});w[e.target.dataset.ws]=e.target.value;save('a4.ws',w)}});
+
+  var notes=load('a4.notes',{});
+  document.querySelectorAll('[data-note]').forEach(function(t){t.value=notes[t.dataset.note]||'';t.addEventListener('input',function(){var n=load('a4.notes',{});n[t.dataset.note]=t.value;save('a4.notes',n)})});
+
+  var flowBtns=[].slice.call(document.querySelectorAll('#flow button'));
+  var subs=[].slice.call(document.querySelectorAll('.substep'));
+  var seen=load('a4.seen',{});
+  function step(n){
+    n=String(n);subs.forEach(function(s){s.classList.toggle('on',s.dataset.s===n)});
+    seen[n]=1;save('a4.seen',seen);
+    flowBtns.forEach(function(b){b.classList.toggle('on',b.dataset.s===n);b.classList.toggle('done',!!seen[b.dataset.s]&&b.dataset.s!==n)});
+    var fb=document.querySelector('#flow button[data-s="'+n+'"]');if(fb)fb.scrollIntoView({inline:'center',block:'nearest'});
+  }
+  flowBtns.forEach(function(b){b.addEventListener('click',function(){step(b.dataset.s)})});
+  document.querySelectorAll('[data-go]').forEach(function(b){b.addEventListener('click',function(){step(b.dataset.go);document.getElementById('flow').scrollIntoView({block:'start'})})});
+  step(load('a4.step','1'));
+  document.getElementById('demoReveal').addEventListener('click',function(){document.getElementById('demoBox').classList.add('on')});
+  document.getElementById('chkBtn').addEventListener('click',function(){document.getElementById('chkBox').classList.add('on')});
+
+  var qs=['Why this creator rather than the one with the most followers?','How does this creator fit the goal of saves and product questions?','How well does this creator’s audience match the target audience in the brief?','Does this creator’s style fit a calm, honest, evidence-informed brand?','What are you giving up by not choosing one of the other candidates?','How did you weigh the cost against the other criteria?'];
+  document.getElementById('qcards').innerHTML=qs.map(function(q){return '<li style="margin-bottom:4px">'+q+'</li>'}).join('');
+
+  var brief=[].slice.call(document.querySelectorAll('.substep[data-s="1"] .brief dt')).map(function(dt){return dt.textContent+': '+dt.nextElementSibling.textContent}).join('\n');
+  var candText=C.map(function(c){return c.id+' · '+c.n+' ('+c.bio+'): '+c.f+' followers; Launch Market followers '+c.lm+'; ages of Launch Market followers 18–19 '+c.ages[0]+'%, 20–24 '+c.ages[1]+'%, 25–29 '+c.ages[2]+'%, 30–34 '+c.ages[3]+'%, 35+ '+c.ages[4]+'%; interests: '+c.int+'; comment examples from past posts about other products: '+c.cm.join(' ')+'; style: '+c.sty+', caption example '+c.cap+'; Reels (10 most recent in 90 days): average reach '+c.reel[0]+', save rate '+c.reel[1]+', average comments '+c.reel[2]+', product-question share '+c.reel[3]+'; feed posts: average reach '+c.feed[0]+', save rate '+c.feed[1]+'; past sponsored content: '+c.sp+'; quote '+c.fee+' for 1 Reel + 3 Stories, all fees included.'}).join('\n');
+  var prompt='You are the brand manager of TikkiTakka Skin, a fictional skincare brand. You are holding a short pre-pitch meeting with an agency team that will recommend one Instagram creator for the launch of Barrier Calm Serum.\n\nRules:\n1. Start by asking the team which creator they currently recommend.\n2. Then ask one why-question at a time about their choice: why this creator rather than another, how the choice fits the campaign goal and target audience, and what they give up.\n3. Do not recommend a creator, do not write or improve their recommendation, and do not score or give feedback.\n4. Use only the brief and the four creator profiles below. Do not invent numbers, facts or market details. The "Launch Market" is one fictional market; do not name a country.\n5. If the team asks for information that is not in the brief or the profiles, say that it is not available.\n6. Keep each message short and polite, like a real client.\n\nCLIENT BRIEF\n'+brief+'\n\nCREATOR PROFILES (all fictional)\n'+candText;
+  document.getElementById('copyPrompt').addEventListener('click',function(){
+    var msg=document.getElementById('copyMsg');
+    function done(){msg.textContent='Client prompt copied. Paste it into an AI chat, then answer the client’s questions as your team would.'}
+    if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(prompt).then(done,fallback)}else{fallback()}
+    function fallback(){var ta=document.createElement('textarea');ta.value=prompt;document.body.appendChild(ta);ta.select();try{document.execCommand('copy');done()}catch(e){msg.textContent='Copy failed — select and copy the prompt manually.'}document.body.removeChild(ta)}
+  });
+
+  var t=1200,tid=null;
+  document.getElementById('timerBtn').addEventListener('click',function(){
+    var b=this;if(tid){clearInterval(tid);tid=null;b.textContent='Resume timer';return}if(t<=0){t=1200;document.getElementById('timer').textContent='20:00'}
+    b.textContent='Pause timer';tid=setInterval(function(){t--;if(t<=0){t=0;clearInterval(tid);tid=null;b.textContent='Time is up · restart'}
+      document.getElementById('timer').textContent=String(Math.floor(t/60)).padStart(2,'0')+':'+String(t%60).padStart(2,'0')},1000)});
+
+  document.getElementById('dlNotes').addEventListener('click',function(){
+    var n=load('a4.notes',{}),w=load('a4.ws',{});
+    var L=['Make Your Case · my notes','','(1) Goal and target: '+(n.s1||''),'','(2) Demo judgment: '+(n.s2||''),'','(3) Comparison table:'];
+    crit.forEach(function(k,ri){L.push('  '+k+': '+C.map(function(c,ci){return c.n+' = '+(w[ri+'_'+ci]||'-')}).join(' | '))});
+    L.push('','Provisional pick: '+(n.s3||''),'','(4) Rehearsal log: '+(n.s4||''),'','(5) My recommendation after the update','  Compare: '+(n.r1||''),'  Recommend: '+(n.r2||''),'  Trade-offs: '+(n.r3||''),'','(6) Reflection: '+(n.s6||''));
+    var a=document.createElement('a');a.href=URL.createObjectURL(new Blob([L.join('\n')],{type:'text/plain'}));a.download='make-your-case-notes.txt';a.click();
+  });
+  document.getElementById('clrNotes').addEventListener('click',function(){
+    ['a4.notes','a4.ws','a4.seen'].forEach(function(k){delete mem[k];store.del(k)});
+    document.querySelectorAll('[data-note]').forEach(function(t){t.value=''});document.querySelectorAll('[data-ws]').forEach(function(i){i.value=''});
+    seen={};step('1');
+  });
+  var _step=step;step=function(n){_step(n);save('a4.step',String(n))};
+})();
+</script>
 </body>
 </html>
